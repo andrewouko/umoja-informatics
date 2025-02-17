@@ -1,5 +1,5 @@
 simple_lambda.zip
-.terraform
+.terraform/*
 terraform.tfstate.d
 simple_lambda/dist
 simple_lambda/node_modules
