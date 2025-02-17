@@ -85,29 +85,29 @@ After applying the configuration, you can verify the deployment by checking the 
 
 ### 1. Lambda Function
 
-The lambda.tf file is used to create a Lambda function. It includes the following resources:
+The lambda.tf file is used to create a Lambda function for different environments (workspaces). It includes the following resources:
 
 1. Creates a zip file containing the source code for the Lambda function at the root of the project - `simple_lambda.zip`.
 2. The actual lambda function named - `simple_lambda_${workspace name from setup instructions}`. The lambda uses Node 20 runtime and has 1 environment variable `ENV`.
 
 ### 2. S3 Bucket
 
-The s3.tf file creates a single S3 bucket. It includes the following resources:
+The s3.tf file creates a single S3 bucket in each environment (workspace). It includes the following resources:
 
 1. The actual s3 bucket named - `simple-bucket-${workspace name from setup instructions}`.
 
 ### 3. HTTP API Gateway
 
-The simple_http_api_gateway.tf file creates an HTTP API Gateway to expose the Lambda function. It includes the following resources:
+The simple_http_api_gateway.tf file creates a HTTP API Gateway to expose the Lambda functions. It includes the following resources:
 
 1. A HTTP API Gateway - we can also use a REST API but for this simple demonstration a HTTP API suffices.
 2. Integrates the API Gateway with the Lambda function using the `POST` method. We also use the  `AWS_PROXY` type so that the lambda can handle the request and response.
-3. Add a `HTTP POST` route name `/hello` to invoke the Lambda function.
+3. Add a `HTTP POST` route name `/hello` to invoke the `simple_lambda_${workspace name from setup instructions}` Lambda function.
 4. A deployment stage for each environment for the API Gateway to ensure that is auto deployed.
 
 ### 4. IAM Roles and Policies
 
-The iam.tf creates the IAM roles and policies. It includes the following resources:
+The iam.tf creates the IAM roles and policies for different environments (workspaces). It includes the following resources:
 
 1. A IAM role `lambda-role` that (all) lambda functions assume when executing.
 2. An IAM policy `full_s3_access_policy` that grants full s3 access to the `simple_static_bucket` s3 bucket. The permission is only granted to one principal:  `simple_lambda_${workspace name from setup instructions}`.

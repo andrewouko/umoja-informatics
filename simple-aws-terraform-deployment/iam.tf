@@ -1,6 +1,6 @@
 // Role for all lambda functions to assume when executing
 resource "aws_iam_role" "lambda_role" {
-  name = "lambda_role"
+  name = "lambda_role_${terraform.workspace}"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
@@ -17,7 +17,7 @@ resource "aws_iam_role" "lambda_role" {
 
 // Create a policy for full S3 access to the static bucket to only the simple lambda
 resource "aws_iam_policy" "full_s3_access_policy" {
-  name        = "full_s3_access_policy"
+  name        = "full_s3_access_policy_${terraform.workspace}"
   description = "Policy for full S3 access to static bucket"
 
   policy = jsonencode({
@@ -48,7 +48,7 @@ resource "aws_iam_policy" "full_s3_access_policy" {
 
 // Create a policy for S3 read access to the static bucket to only the simple lambda
 resource "aws_iam_policy" "s3_read_access_policy" {
-  name        = "s3_read_access_policy"
+  name        = "s3_read_access_policy_${terraform.workspace}"
   description = "Policy for S3 read access to static bucket"
 
   policy = jsonencode({
