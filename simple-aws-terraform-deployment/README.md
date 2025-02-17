@@ -96,6 +96,8 @@ The s3.tf file creates a single S3 bucket in each environment (workspace). It in
 
 1. The actual s3 bucket named - `simple-bucket-${workspace name from setup instructions}`.
 
+![S3 Bucket](images/s3_bucket.png)
+
 ### 3. HTTP API Gateway
 
 The simple_http_api_gateway.tf file creates a HTTP API Gateway to expose the Lambda functions. It includes the following resources:
