@@ -1,0 +1,16 @@
+{
+    "name": "simple-lambda",
+    "version": "1.0.0",
+    "description": "A simple AWS Lambda function that says hello",
+    "main": "dist/index.js",
+    "scripts": {
+        "build": "rm -rf ./dist && tsc"
+    },
+    "dependencies": {
+        "@types/aws-lambda": "^8.10.92"
+    },
+    "devDependencies": {
+        "@types/node": "^22.13.4",
+        "typescript": "^5.0.0"
+    }
+}

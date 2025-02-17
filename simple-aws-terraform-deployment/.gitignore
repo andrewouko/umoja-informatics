@@ -1,0 +1,7 @@
+simple_lambda.zip
+.terraform
+terraform.tfstate.d
+simple_lambda/dist
+simple_lambda/node_modules
+.terraform.lock.hcl
+tfplan
