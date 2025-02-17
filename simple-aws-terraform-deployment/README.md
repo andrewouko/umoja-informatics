@@ -90,22 +90,43 @@ The lambda.tf file is used to create a Lambda function for different environment
 1. Creates a zip file containing the source code for the Lambda function at the root of the project - `simple_lambda.zip`.
 2. The actual lambda function named - `simple_lambda_${workspace name from setup instructions}`. The lambda uses Node 20 runtime and has 1 environment variable `ENV`.
 
+You should see two lambdas.
+
+![Lambda functions](images/lambda.png)
+
+The environment variables for the lambda
+
+![Lambda envs](images/lambda_envs.png)
+
 ### 2. S3 Bucket
 
 The s3.tf file creates a single S3 bucket in each environment (workspace). It includes the following resources:
 
 1. The actual s3 bucket named - `simple-bucket-${workspace name from setup instructions}`.
 
-![S3 Bucket](images/s3_bucket.png)
+You should see 2 buckets after applying both workspaces.
+
+![S3 Bucket](images/s3.png)
 
 ### 3. HTTP API Gateway
 
-The simple_http_api_gateway.tf file creates a HTTP API Gateway to expose the Lambda functions. It includes the following resources:
+The simple_http_api_gateway.tf file creates HTTP API Gateways for each environment (workspace) to expose the Lambda functions. It includes the following resources:
 
 1. A HTTP API Gateway - we can also use a REST API but for this simple demonstration a HTTP API suffices.
 2. Integrates the API Gateway with the Lambda function using the `POST` method. We also use the  `AWS_PROXY` type so that the lambda can handle the request and response.
 3. Add a `HTTP POST` route name `/hello` to invoke the `simple_lambda_${workspace name from setup instructions}` Lambda function.
 4. A deployment stage for each environment for the API Gateway to ensure that is auto deployed.
+
+HTTP API Gateways
+
+![HTTP API Gateways](images/http_api_gateways.png)
+
+HTTP API Gateway Route(s)
+
+![HTTP API Gateway Routes](images/routes.png)
+
+Deployment Stages
+![HTTP API Gateway Deployment Stages](images/deployment_stages.png)
 
 ### 4. IAM Roles and Policies
 
@@ -116,3 +137,11 @@ The iam.tf creates the IAM roles and policies for different environments (worksp
 3. An IAM policy `s3_read_access_policy` that grants read access to the `simple_static_bucket` s3 bucket. The permission is only granted to one principal:  `simple_lambda_${workspace name from setup instructions}`.
 4. Attaches the `AWSLambdaBasicExecutionRole` to the `lambda-role` to allow the principals (all lambdas) to log to cloudwatch.
 5. Attaches the `full_s3_access_policy` to the `lambda-role` to allow the principals (only `simple_lambda_${workspace name from setup instructions}`) full access to the `simple_static_bucket` s3 bucket.
+
+The AWSLambdaBasicExecutionRole role that the lambda(s) assume
+
+![Lambda execution role](images/lambda_exec_role.png)
+
+Policy for full S3 access to static bucket
+
+![Lambda s3 full access](images/lambda_s3_perm.png)

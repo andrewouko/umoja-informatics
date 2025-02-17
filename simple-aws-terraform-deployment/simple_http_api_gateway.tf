@@ -6,7 +6,7 @@
 
 // Use the v2 version of the API Gateway to create a HTTP API
  resource "aws_apigatewayv2_api" "simple_http_api_gateway" {
-  name          = "simple_http_api_gateway"
+  name          = "simple_http_api_gateway_${terraform.workspace}"
   protocol_type = "HTTP"
 }
 
