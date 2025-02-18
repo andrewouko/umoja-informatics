@@ -29,9 +29,13 @@ Navigate to the project directory and build the lambda code
 cd simple_lambda
 ```
 
+Install Dependencies
+
 ```sh
 npm i
 ```
+
+Build the lambda code
 
 ```sh
 npm run build
