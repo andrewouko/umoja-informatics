@@ -1,6 +1,6 @@
 # Simple AWS Terraform Deployment
 
-This project sets up a simple AWS infrastructure using Terraform. It includes an S3 bucket for static file storage, a Lambda function, and an HTTP API Gateway to expose the Lambda function.
+This project sets up a simple AWS infrastructure using Terraform. It includes an S3 bucket for static file storage, a Lambda function, an HTTP API Gateway to expose the Lambda function and a Postgres RDS Instance each in 2 different environments (dev and prod).
 
 ## Prerequisites
 
@@ -201,6 +201,7 @@ The `database.tf` creates the RDS instance and outputs its endpoint. It includes
 - It uses the `rds_sg_${env name}` security group as described above.
 - It uses the `rds_subnet_group_${env name}` sub net group as described above.
 - It does not store a final snapshot of the db when the instance is destroyed.
+- The database is only publicly accessible in the dev environment.
 
 Dev Database Instance
 
