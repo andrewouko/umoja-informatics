@@ -24,4 +24,8 @@ resource "aws_lambda_function" "simple_lambda" {
       ENV = terraform.workspace
     }
   }
+  vpc_config {
+    subnet_ids = aws_subnet.main[*].id
+    security_group_ids = [aws_security_group.lambda_sg.id]
+  }
 }

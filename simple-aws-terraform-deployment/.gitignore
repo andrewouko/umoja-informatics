@@ -5,3 +5,4 @@ simple_lambda/dist
 simple_lambda/node_modules
 .terraform.lock.hcl
 tfplan
+secrets.tfvars

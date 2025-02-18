@@ -91,3 +91,18 @@ resource "aws_iam_role_policy_attachment" "full_s3_access_policy_attachment" {
   policy_arn = aws_iam_policy.full_s3_access_policy.arn
 }
 
+// Attach VPC access policy to the lambda role
+// Allows the lambda to create network interfaces in the VPC
+resource "aws_iam_role_policy_attachment" "lambda_vpc_access_policy" {
+  role       = aws_iam_role.lambda_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+}
+// Allow the API Gateway to invoke the lambda function
+resource "aws_lambda_permission" "api_gateway_invoke" {
+  statement_id  = "AllowAPIGatewayInvoke_${terraform.workspace}"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.simple_lambda.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.simple_http_api_gateway.execution_arn}/*"
+}
+
