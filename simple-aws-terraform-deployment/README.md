@@ -27,8 +27,20 @@ Navigate to the project directory and build the lambda code
 
 ```sh
 cd simple_lambda
+```
+
+```sh
 npm i
+```
+
+```sh
 npm run build
+```
+
+Navigate back to the root of the project
+
+```sh
+cd ..
 ```
 
 ### 2. Initialize the Terraform Project
