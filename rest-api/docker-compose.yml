@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:14
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgres://myusername:mypassword@db:5432/postgres
+    depends_on:
+      - db
+    volumes:
+      # - .:/app # for development to aid hot reload
+      - /app/node_modules
+    command: npm run start
+    # command: npm run dev # for development
+
+volumes:
+  pgdata:
