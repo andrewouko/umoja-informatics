@@ -6,7 +6,7 @@ This project sets up a simple AWS infrastructure using Terraform. It includes an
 
 - [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - AWS CLI configured with appropriate credentials
-- Create a secrets.tfvars with `db_username` and `db_password` values. NB: The username cannot be admin (reserved).
+- Create a `secrets.tfvars` file with `db_username` and `db_password` values at the root of the project. NB: The username cannot be admin (reserved).
 
 ```sh
 export AWS_ACCESS_KEY_ID=<Your aws access key>
