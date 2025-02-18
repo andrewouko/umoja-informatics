@@ -16,7 +16,7 @@ This project is a REST API built using ExpressJs and Postgres.
 
 ## Configuration
 
-Create a `.env` file in the root directory use the `.env.example` as a guide.
+Create a `.env` file in the root directory. Use the `.env.example` as a guide.
 
 ## Docker compose
 
@@ -105,10 +105,18 @@ Create a `.env` file in the root directory use the `.env.example` as a guide.
 }
 ```
 
-- `DELETE /api/users/:id` - Delete a user by ID
+### `DELETE /api/users/:id` - Delete a user by ID
 
 ```json
 {
     "message": "User deleted successfully"
+}
+```
+
+### Error Response Format
+
+```json
+{
+    "error": "The role should be one of the following: author, user."
 }
 ```
